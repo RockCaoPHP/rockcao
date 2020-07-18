@@ -4,6 +4,7 @@ namespace app\wechat\controller;
 class Notify
 {
 	const TOKEN = 'CSC@2018@LL';
+	private $data = null;
 	
 	public function index()
 	{
@@ -14,6 +15,16 @@ class Notify
 	
 	private function checkSign()
 	{
+		$request = request();
+		$this->data = [
+			'get' => $request->get(),
+			'post' => $request->post(),
+			'request' => $request->request(),
+			'input' => $request->getInput(),
+		];
+		
+		trace($this->data, 'wechat_notify_data');
+		
 		$signature = input('get.signature');
 		$timestamp = input('get.timestamp');
 		$nonce = input('get.nonce');
