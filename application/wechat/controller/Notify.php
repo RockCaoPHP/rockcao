@@ -3,7 +3,7 @@ namespace app\wechat\controller;
 
 class Notify
 {
-	const TOKEN = 'CSC@2018@LL';
+	const TOKEN = 'LL16CSC19CYJ06';
 	private $data = null;
 	
 	public function index()
