@@ -3,7 +3,6 @@ namespace app\wechat\controller;
 
 class Notify
 {
-	const TOKEN = 'LL16CSC19CYJ06';
 	private $data = null;
 	
 	public function index()
@@ -61,31 +60,6 @@ class Notify
 	
 	private function text($arr)
 	{
-/*
-<xml><ToUserName><![CDATA[gh_c9a64df72343]]></ToUserName>
-<FromUserName><![CDATA[ou9541J6yhERCprBh7xZlHmfubak]]></FromUserName>
-<CreateTime>1595097292</CreateTime>
-<MsgType><![CDATA[event]]></MsgType>
-<Event><![CDATA[subscribe]]></Event>
-<EventKey><![CDATA[]]></EventKey>
-</xml>
-
-<xml><ToUserName><![CDATA[gh_c9a64df72343]]></ToUserName>
-<FromUserName><![CDATA[ou9541J6yhERCprBh7xZlHmfubak]]></FromUserName>
-<CreateTime>1595097026</CreateTime>
-<MsgType><![CDATA[event]]></MsgType>
-<Event><![CDATA[unsubscribe]]></Event>
-<EventKey><![CDATA[]]></EventKey>
-</xml>
-		
-<xml><ToUserName><![CDATA[gh_c9a64df72343]]></ToUserName>
-<FromUserName><![CDATA[ou9541J6yhERCprBh7xZlHmfubak]]></FromUserName>
-<CreateTime>1595096553</CreateTime>
-<MsgType><![CDATA[text]]></MsgType>
-<Content><![CDATA[你好]]></Content>
-<MsgId>22836290069516180</MsgId>
-</xml>
-*/
 		$time = time();
 		$content = data('Content', $arr);
 		if (data('Event', $arr) == 'subscribe') {
