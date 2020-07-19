@@ -1,5 +1,8 @@
 <?php
 return [
+	// 接口域名
+	'api_host' => 'https://api.weixin.qq.com',
+	
 	// 公众号openid
 	'gh_openid' => 'gh_c9a64df72343',
 	
