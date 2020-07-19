@@ -43,8 +43,9 @@ class Notify
 		$timestamp = input('get.timestamp');
 		$nonce = input('get.nonce');
 		$echostr = input('get.echostr');
+		$token = config('wechat.token');
 		
-		$sign = [self::TOKEN, $timestamp, $nonce];
+		$sign = [$token, $timestamp, $nonce];
 		sort($sign, SORT_STRING);
 		$sign = implode($sign);
 		$sign = sha1($sign);
