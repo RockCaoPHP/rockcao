@@ -103,17 +103,16 @@ class Notify
 		}
 		
 		$config = config('wechat.');
-		
 		$url = "{$config['api_host']}/cgi-bin/token?grant_type=client_credential&appid={$config['app_id']}&secret={$config['app_secret']}";
-		$result = curl_get($url);
-		$result = json_decode($result, true);
-		$result['end_time'] = $now + $result['expires_in'],
-		$result['end_date_time'] = date('Y-m-d H:i:s', $result['end_time']);
 		
-		db('config')->where('id', $info['id'])->update([
-			'cvalue' => json_encode($result),
+		$json = curl_get($url);
+		$json = json_decode($json, true);
+		$json['end_time'] = $now + $json['expires_in'];
+		
+		db('config')->where('id', '=', $info['id'])->update([
+			'cvalue' => json_encode($json),
 		]);
 		
-		return $result['access_token'];
+		return $json['access_token'];
 	}
 }
