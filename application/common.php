@@ -49,4 +49,32 @@ function curl_get($url, $https = true)
 	return $result;
 }
 
+function get_wechat_access_token()
+{
+	$now = time();
+	$info = db('config')
+		->field('id,cvalue')
+		->where('ckey', 'wechat_access_token')
+		->find();
+	$json = $info['cvalue'] ? json_decode($info['cvalue'], true) : null;
+	
+	$end_time = data('end_time', $json, 0);
+	if ($end_time - $now > 200) {
+		return $json['access_token'];
+	}
+	
+	$config = config('wechat.');
+	$url = "{$config['api_host']}/cgi-bin/token?grant_type=client_credential&appid={$config['app_id']}&secret={$config['app_secret']}";
+	
+	$json = curl_get($url);
+	$json = json_decode($json, true);
+	$json['end_time'] = $now + $json['expires_in'];
+	
+	db('config')->where('id', '=', $info['id'])->update([
+		'cvalue' => json_encode($json),
+	]);
+	
+	return $json['access_token'];
+}
+
 
