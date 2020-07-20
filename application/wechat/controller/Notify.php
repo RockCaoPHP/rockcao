@@ -82,6 +82,12 @@ class Notify
 		exit;
 	}
 	
+	public function openid()
+	{
+		$access_token = $this->getAccessToken();
+		halt($access_token);
+	}
+	
 	private function getAccessToken()
 	{
 		$now = time();
@@ -99,7 +105,10 @@ class Notify
 		$config = config('wechat.');
 		
 		$url = "{$config['api_host']}/cgi-bin/token?grant_type=client_credential&appid={$config['app_id']}&secret={$config['app_secret']}";
-		
-		
+		echo $url . '<br />';
+		$result = curl_get($url);
+		echo $result . '<br />';
+		$result = json_decode($result, true);
+		halt($result);
 	}
 }
