@@ -77,4 +77,18 @@ function get_wechat_access_token()
 	return $json['access_token'];
 }
 
+function get_host()
+{
+	return request()->domain();
+}
 
+function get_visit_token()
+{
+	$token = strip(cookie('visit_token'));
+	if ($token) {
+		return $token;
+	}
+	$token = \phpgo\Str::guid();
+	think\facade\Cookie::forever('visit_token', $token);
+	return $token;
+}

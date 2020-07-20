@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+<title>扫码登录</title>
+<meta charset="utf-8" />
+<link href="<?php echo get_host(); ?>/static/css/login.css?t=<?php echo time(); ?>" rel="stylesheet" />
+<script src="<?php echo get_host(); ?>/static/js/jquery.min.js"></script>
+<script src="<?php echo get_host(); ?>/static/js/qrcodejs/qrcode.min.js"></script>
+</head>
+
+<body>
+<div id="tip-title">微信扫码登录</div>
+
+<div id="qrcode"></div>
+
+<div id="tip-info">
+	<div id="tip-info-text">
+		<p>请使用微信扫描二维码登录</p>
+		<p>“<?php echo request()->host(); ?>”</p>
+	</div>
+</div>
+
+<script type="text/javascript">
+var qrcode = new QRCode(document.getElementById("qrcode"), {
+	text: "<?php echo get_host(); ?>/wechat/login/check?vst=<?php echo get_visit_token(); ?>",
+	width: 430,
+	height: 430,
+	colorDark : "#000000",
+	colorLight : "#ffffff",
+	correctLevel : QRCode.CorrectLevel.H
+});
+
+setTimeout(function() {
+	$("#qrcode").slideDown(300);
+	//document.getElementById("qrcode").style.display = "block";
+}, 300);
+
+</script>
+</body>
+
+</html>
