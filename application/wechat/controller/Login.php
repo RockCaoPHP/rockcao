@@ -10,6 +10,8 @@ class Login
 	
 	public function check()
 	{
+		echo $_SERVER['HTTP_USER_AGENT'];
+		echo '<hr />';
 		dump($_SERVER);
 		dump($_REQUEST);
 		dump($_GET);
